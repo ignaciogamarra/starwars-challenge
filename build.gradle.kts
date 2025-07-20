@@ -15,7 +15,8 @@ val versions = mapOf(
     "mockitoCore" to "5.5.0",
     "mockitoJUnit" to "5.5.0",
     "assertjCore" to "3.24.2",
-    "lombokMapstructBinding" to "0.2.0"
+    "lombokMapstructBinding" to "0.2.0",
+    "javaxServlet" to "3.0.1"
 )
 
 repositories {
@@ -28,6 +29,7 @@ dependencies {
     implementation("com.fasterxml.jackson.core:jackson-databind:${versions["jackson"]}")
     implementation("org.projectlombok:lombok:${versions["lombok"]}")
     implementation("org.mapstruct:mapstruct:${versions["mapstruct"]}")
+    compileOnly("javax.servlet:javax.servlet-api:${versions["javaxServlet"]}")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation(platform("org.junit:junit-bom:${versions["junitBom"]}"))
     testImplementation("org.junit.jupiter:junit-jupiter")

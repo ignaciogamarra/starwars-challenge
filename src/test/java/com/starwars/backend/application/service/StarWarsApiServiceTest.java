@@ -22,7 +22,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
-class StarWarsServiceTest {
+class StarWarsApiServiceTest {
 
   @Mock
   private ResourceConnectorImpl<Starship> starshipConnector;

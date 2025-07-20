@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 @EnableAutoConfiguration(exclude={DataSourceAutoConfiguration.class})
 
-@CrossOrigin
 @RestController
 public class StarWarsController {
 
@@ -23,12 +22,14 @@ public class StarWarsController {
     this.starWarsService = starWarsService;
   }
 
+  @CrossOrigin(origins = "http://localhost:6969")
   @GetMapping("/starships")
   public List<StarshipDTO> getStarships(final @RequestParam(defaultValue = "ASC") String orderBy,
       final @RequestParam (defaultValue = "name") String field) {
     return starWarsService.getStarships(orderBy, field);
   }
 
+  @CrossOrigin(origins = "http://localhost:6969")
   @GetMapping("/people")
   public List<PeopleDTO> getPeople(final @RequestParam(defaultValue = "ASC") String orderBy,
       final @RequestParam (defaultValue = "name") String field) {

@@ -16,7 +16,7 @@ public class GlobalExceptionHandler {
   public ResponseEntity<ErrorResponse> handleStarWarsException(StarWarsException ex) {
     ErrorResponse errorResponse = new ErrorResponse(
         HttpStatus.INTERNAL_SERVER_ERROR.value(),
-        "StarWars Server Error: " + ex.getMessage()
+        "StarWarsApi Server Error: " + ex.getMessage()
     );
     return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
   }

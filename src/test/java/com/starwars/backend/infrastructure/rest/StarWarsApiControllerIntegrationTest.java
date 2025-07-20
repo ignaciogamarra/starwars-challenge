@@ -22,7 +22,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-class StarWarsControllerIntegrationTest {
+class StarWarsApiControllerIntegrationTest {
 
   @Autowired
   private MockMvc mockMvc;
