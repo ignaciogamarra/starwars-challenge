@@ -15,6 +15,7 @@ import lombok.NoArgsConstructor;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class StarshipDTO {
   private String name;
+  private String created;
   private String model;
   private String manufacturer;
   private String costInCredits;

@@ -4,7 +4,6 @@ import com.starwars.backend.application.dto.PeopleDTO;
 import com.starwars.backend.application.dto.StarshipDTO;
 import com.starwars.backend.application.service.StarWarsService;
 import com.starwars.backend.application.util.MockBuilderUtils;
-import com.starwars.backend.infrastructure.exceptions.StarWarsException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +32,7 @@ class StarWarsApiControllerIntegrationTest {
   @DisplayName("GIVEN a valid request to get starships WHEN the service returns data THEN the response is correct")
   @Test
   void test_getStarships_ok() throws Exception {
-    List<StarshipDTO> starships = MockBuilderUtils.createStarshipDTOsList();
+    List<StarshipDTO> starships = List.of(MockBuilderUtils.createStarshipDTO());
 
     when(starWarsService.getStarships("ASC", "name")).thenReturn(starships);
 
@@ -49,7 +48,7 @@ class StarWarsApiControllerIntegrationTest {
   @DisplayName("GIVEN a valid request to get people WHEN the service returns data THEN the response is correct")
   @Test
   void test_getPeople_ok() throws Exception {
-    List<PeopleDTO> people = MockBuilderUtils.createPeopleDTOsList();
+    List<PeopleDTO> people = List.of(MockBuilderUtils.createPeopleDTO());
 
     when(starWarsService.getPeople("ASC", "name")).thenReturn(people);
 

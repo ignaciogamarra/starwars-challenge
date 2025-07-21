@@ -1,7 +1,9 @@
 package com.starwars.backend.application.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.anyList;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 
 import java.util.List;
@@ -14,6 +16,7 @@ import com.starwars.backend.application.util.MockBuilderUtils;
 import com.starwars.backend.domain.model.People;
 import com.starwars.backend.domain.model.Starship;
 import com.starwars.backend.infrastructure.connector.ResourceConnectorImpl;
+import com.starwars.backend.infrastructure.exceptions.StarWarsException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -38,25 +41,25 @@ class StarWarsApiServiceTest {
 
   @DisplayName("GIVEN a valid parameters orderBy and field WHEN getStarships is called THEN return a list of StarshipDTO")
   @Test
-  void test_getStarships_ok() {
-//    when(this.starshipConnector.getResourceByEntityName(anyString(), anyString(), eq("starships"), eq(Starship.class)))
-//        .thenReturn(MockBuilderUtils.createStarshipList());
+  void test_getStarships_ok() throws StarWarsException {
+    when(this.starshipConnector.getResourceByEntityName(anyString(), anyString(), eq("starships"), eq(Starship.class)))
+        .thenReturn(List.of(MockBuilderUtils.createStarship()));
 
-    when(this.starshipMapper.toDTOList(anyList())).thenReturn(MockBuilderUtils.createStarshipDTOsList());
+    when(this.starshipMapper.toDTO(any(Starship.class))).thenReturn(MockBuilderUtils.createStarshipDTO());
 
     final List<StarshipDTO> starshipDTOs = this.starWarsService.getStarships("ASC", "name");
-    assertThat(starshipDTOs).usingRecursiveComparison().isEqualTo(MockBuilderUtils.createStarshipDTOsList());
+    assertThat(starshipDTOs).usingRecursiveComparison().isEqualTo(List.of(MockBuilderUtils.createStarshipDTO()));
   }
 
   @DisplayName("GIVEN a valid parameters orderBy and field WHEN getPeople is called THEN return a list of PeopleDTO")
   @Test
-  void test_getPeople_ok() {
-//    when(this.peopleConnector.getResourceByEntityName(anyString(), anyString(), eq("people"), eq(People.class)))
-//        .thenReturn(MockBuilderUtils.createPeopleList());
+  void test_getPeople_ok() throws StarWarsException {
+    when(this.peopleConnector.getResourceByEntityName(anyString(), anyString(), eq("people"), eq(People.class)))
+        .thenReturn(List.of(MockBuilderUtils.createPeople()));
 
-    when(this.peopleMapper.toDtoList(anyList())).thenReturn(MockBuilderUtils.createPeopleDTOsList());
+    when(this.peopleMapper.toDto(any(People.class))).thenReturn(MockBuilderUtils.createPeopleDTO());
 
     final List<PeopleDTO> peopleDTOs = this.starWarsService.getPeople("ASC", "name");
-    assertThat(peopleDTOs).usingRecursiveComparison().isEqualTo(MockBuilderUtils.createPeopleDTOsList());
+    assertThat(peopleDTOs).usingRecursiveComparison().isEqualTo(List.of(MockBuilderUtils.createPeopleDTO()));
   }
 }

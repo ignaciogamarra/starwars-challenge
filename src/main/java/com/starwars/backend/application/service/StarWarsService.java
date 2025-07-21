@@ -1,6 +1,7 @@
 package com.starwars.backend.application.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.starwars.backend.application.dto.PeopleDTO;
 import com.starwars.backend.application.dto.StarshipDTO;
@@ -31,12 +32,12 @@ public class StarWarsService {
   @SneakyThrows
   public List<StarshipDTO> getStarships(final String orderBy, final String field) {
     final List<Starship> starships = this.starshipConnector.getResourceByEntityName(orderBy, field, "starships", Starship.class);
-    return this.starshipMapper.toDTOList(starships);
+    return starships.stream().map(this.starshipMapper::toDTO).collect(Collectors.toList());
   }
 
   @SneakyThrows
   public List<PeopleDTO> getPeople(final String orderBy, final String field) {
     final List<People> people = this.peopleConnector.getResourceByEntityName(orderBy, field, "people", People.class);
-    return this.peopleMapper.toDtoList(people);
+    return people.stream().map(this.peopleMapper::toDto).collect(Collectors.toList());
   }
 }

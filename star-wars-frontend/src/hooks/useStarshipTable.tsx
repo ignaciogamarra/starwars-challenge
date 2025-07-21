@@ -18,6 +18,13 @@ export function useStarshipTable(data: Starship[]) {
           <div className="font-medium text-yellow-400">{info.getValue()}</div>
         ),
       }),
+      columnHelper.accessor("created", {
+        header: "Created",
+        enableSorting: true,
+        cell: (info) => (
+            <div className="text-gray-400 text-sm">{info.getValue()}</div>
+        ),
+      }),
       columnHelper.accessor("model", {
         header: "Model",
         enableSorting: true,
@@ -35,7 +42,7 @@ export function useStarshipTable(data: Starship[]) {
           </div>
         ),
       }),
-      columnHelper.accessor("cost_in_credits", {
+      columnHelper.accessor("costInCredits", {
         header: "Cost (Credits)",
         cell: (info) => {
           const value = info.getValue();
@@ -68,7 +75,7 @@ export function useStarshipTable(data: Starship[]) {
           <div className="text-gray-400 text-sm">{info.getValue()}</div>
         ),
       }),
-      columnHelper.accessor("max_atmosphering_speed", {
+      columnHelper.accessor("maxAtmospheringSpeed", {
         header: "Max Speed",
         enableSorting: true,
         cell: (info) => {
@@ -82,7 +89,7 @@ export function useStarshipTable(data: Starship[]) {
           );
         },
       }),
-      columnHelper.accessor("cargo_capacity", {
+      columnHelper.accessor("cargoCapacity", {
         header: "Cargo (kg)",
         enableSorting: true,
         cell: (info) => {
@@ -102,7 +109,7 @@ export function useStarshipTable(data: Starship[]) {
           <div className="text-gray-400 text-sm">{info.getValue()}</div>
         ),
       }),
-      columnHelper.accessor("hyperdrive_rating", {
+      columnHelper.accessor("hyperdriveRating", {
         header: "Hyperdrive",
         enableSorting: true,
         cell: (info) => {
@@ -150,7 +157,7 @@ export function useStarshipTable(data: Starship[]) {
           );
         },
       }),
-      columnHelper.accessor("starship_class", {
+      columnHelper.accessor("starshipClass", {
         header: "Class",
         cell: (info) => (
           <div className="inline-flex px-3 py-1 text-xs font-medium bg-gray-800/60 text-yellow-300 border border-gray-700/50 rounded-full capitalize">

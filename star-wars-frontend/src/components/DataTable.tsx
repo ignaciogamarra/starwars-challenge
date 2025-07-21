@@ -1,24 +1,37 @@
-import { flexRender } from "@tanstack/react-table";
+import { flexRender, type Table } from "@tanstack/react-table";
 import type { Starship } from "../types/starship";
+import type { Person } from "../types/person";
 import { useStarshipTable } from "../hooks/useStarshipTable";
+import { usePeopleTable } from "../hooks/usePeopleTable";
 
 interface DataTableProps {
-  data: Starship[];
+  data: Starship[] | Person[];
   onSort: (field: string) => void;
   sortState: { field: string; order: "ASC" | "DESC" } | null;
+  dataType: "starships" | "people";
 }
 
-export default function DataTable({ data, onSort, sortState }: DataTableProps) {
-  const { table } = useStarshipTable(data);
-  const columns = table.getAllColumns();
-
+export default function DataTable({
+  data,
+  onSort,
+  sortState,
+  dataType,
+}: DataTableProps) {
   const handleSort = (columnId: string) => {
     onSort(columnId);
   };
 
-  return (
+  // Get the appropriate table based on data type
+  const { table } =
+    dataType === "starships"
+      ? useStarshipTable(data as Starship[])
+      : usePeopleTable(data as Person[]);
+
+  const columns = table.getAllColumns();
+
+  const renderTable = (table: Table<any>) => (
     <div className="w-full h-full flex flex-col overflow-hidden">
-      <div className="flex-1 overflow-x-auto">
+      <div className="flex-1 overflow-x-auto star-wars-scrollbar">
         <table className="min-w-full h-full">
           <thead className="bg-gray-900/60">
             {table.getHeaderGroups().map((headerGroup) => (
@@ -58,7 +71,7 @@ export default function DataTable({ data, onSort, sortState }: DataTableProps) {
                   colSpan={columns.length}
                   className="px-6 py-16 text-center text-gray-400"
                 >
-                  No starships found in this sector of the galaxy.
+                  No data found in this part of the galaxy.
                 </td>
               </tr>
             ) : (
@@ -83,4 +96,6 @@ export default function DataTable({ data, onSort, sortState }: DataTableProps) {
       </div>
     </div>
   );
+
+  return renderTable(table);
 }

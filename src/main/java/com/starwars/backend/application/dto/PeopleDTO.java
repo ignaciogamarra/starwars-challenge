@@ -15,6 +15,7 @@ import lombok.NoArgsConstructor;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PeopleDTO {
   private String name;
+  private String created;
   private String height;
   private String mass;
   private String hairColor;
